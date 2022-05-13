@@ -16,4 +16,4 @@ jobs:
           key: ${{ secrets.SERVER }} 
           known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
       - name: Deploy with rsync
-        run: rsync -avz . ${{ secrets.SSH_USER }}@${{ secrets.SERVER }}:/home/albdev/platform/
+        run: rsync -avz . ${{ secrets.SSH_USER }}@${{ secrets.SERVERNAME }}:/home/${{ secrets.SSH_USER }}/platform/

@@ -10,10 +10,13 @@ jobs:
   flarum-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SERVER }} 
-          known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
-      - name: Deploy with rsync
-        run: rsync --rsh="/usr/bin/sshpass -p 'Rockw00d' ssh -o StrictHostKeyChecking=no -l albdev"  -avz . ${{ secrets.SSH_USER }}@${{ secrets.SERVERNAME }}:/home/${{ secrets.SSH_USER }}/platform/
+    - name: multiple command
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVERNAME }}
+        username: ${{ secrets.SSH_USER }}
+        passwors: ${{ secrets.SSH_PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: |
+          whoami
+          ls -al
